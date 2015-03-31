@@ -4,6 +4,26 @@ T1K - Automated Git and Trello Workflow
 
 Use those scripts to create automatically branchs associated with issues and tracked commits.
 
+## Config
+```ruby
+T1k.configure do |config|
+  config[:github_user] = 'YOUR_GITHUB_USER'
+  config[:github_repo] = 'REPOSITORY_NAME'
+  
+  # https://github.com/settings/applications
+  # Personal access tokens
+  config[:github_oauth_token] = 'PERSONAL_ACCESS_TOKENS'
+  
+  # https://trello.com/app-key
+  # https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
+  config[:trello_developer_public_key] = 'PUBLIC_KEY'
+  config[:trello_member_token] = 'MEMBER_TOKEN'
+  
+  config[:trello_user_name] = 'YOUR_TRELLO_USER'
+  config[:trello_board_name] = 'BOARD_NAME'
+end
+```
+
 ## License
 
 It's under MIT License
