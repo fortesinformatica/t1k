@@ -5,8 +5,7 @@ namespace :t1k do
   desc "Cria issue e atualiza cartão do trello"
 
   task :hack, [:path_card_part] do |t, args|
-  	code_card = T1k::hack args[:path_card_part]
-  	puts "Cartão #{code_card} criado"
+  	code_card = T1k::hack args[:path_card_part]  	
 
 		system 'git checkout master'
 		system 'git pull --rebase origin master'

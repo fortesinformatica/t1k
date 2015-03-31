@@ -17,7 +17,7 @@ module T1k
 		code_issue = get_issue_code issue
 
 		update_card card, code_issue
-		puts 'Head shot...'
+		puts "Card ##{code_issue[:code]} created and tracked"
 		code_issue[:code]
 	end
 
@@ -45,9 +45,13 @@ module T1k
 	end
 
 	def self.create_issue title
-		puts "Creating issue"
-		github_auth = Github.new :oauth_token => @@config[:github_oauth_token]
-		github_auth.issues.create user: @@config[:github_user], repo: @@config[:github_repo], title: title
+		begin
+			puts "Creating issue"
+			github_auth = Github.new :oauth_token => @@config[:github_oauth_token]
+			github_auth.issues.create user: @@config[:github_user], repo: @@config[:github_repo], title: title
+		rescue
+			raise 'Issue not created'
+		end			
 	end
 
 	def self.get_issue_code issue
