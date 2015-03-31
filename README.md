@@ -4,6 +4,12 @@ T1K - Automated Git and Trello Workflow
 
 Use those scripts to create automatically branchs associated with issues and tracked commits.
 
+##Workflow
+Cria uma issue a partir de parte da url de uma cartão do trello #rake t1k:hack['uD2GBBMf'] 
+Commita alterações *segundo parâmetro é opcional #rake t1k:commit['comentario do commit',close]
+Sincroniza alterações com o branch master #rake t1k:sink
+Publica as alterações, mergeando com o master #rake t1k:ship
+
 ## Config
 ```ruby
 T1k.configure do |config|
