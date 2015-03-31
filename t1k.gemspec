@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.version     = T1k::VERSION
   s.authors     = ["Rodrigo Maia"]
   s.email       = ["rodrigomb@gmail.com"]
+  s.summary     = "T1K - Automated Git and Trello Workflow"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
