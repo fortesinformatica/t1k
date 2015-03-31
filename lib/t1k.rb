@@ -28,9 +28,12 @@ module T1k
 			puts "Catching card"
 			me = Trello::Member.find(@@config[:trello_user_name])
 			board = me.boards.select{|x| x.name.upcase == @@config[:trello_board_name].upcase}.first
-			board.cards.select{|x| x.url.index(url_card)}.first
+			card = board.cards.select{|x| x.url.index(url_card)}.first
+			raise if card.nil?
+
+			card
 		rescue
-			raise 'Url card wrong'
+			raise 'Card not found'
 		end
 	end
 
