@@ -7,6 +7,7 @@ namespace :t1k do
   task :ship do |t, args|
   	branch = `git branch | grep '*' | awk '{print $2}'`
 		system "git checkout master"
+		system "git pull --rebase"
 		system "git merge #{branch.strip}"
 		system "git commit -v"
 		system "git push origin master"
