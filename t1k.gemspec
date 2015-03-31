@@ -9,9 +9,6 @@ Gem::Specification.new do |s|
   s.version     = T1k::VERSION
   s.authors     = ["Rodrigo Maia"]
   s.email       = ["rodrigomb@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of T1k."
-  s.description = "TODO: Description of T1k."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
