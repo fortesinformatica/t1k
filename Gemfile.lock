@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    t1k (0.2.1)
+    t1k (1.0.0)
       github_api (~> 0.12)
       rails (>= 4.0.2)
       ruby-trello (= 1.2.1)

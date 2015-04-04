@@ -13,8 +13,17 @@ module T1k
 			cattr_accessor :repo
 			@@repo = ""
 
+			Issue = Struct.new(:code, :link)
+
 			def self.setup &block
 				yield(self) if block_given?
+				self.config_keys
+			end
+
+			def self.config_keys
+				# ::Github.configure do |config|
+					# your keys
+				# end
 			end
 
 			def self.create_issue title
@@ -26,6 +35,11 @@ module T1k
 				rescue
 					raise 'Issue not created'
 				end			
+			end
+
+			def self.get_issue html_url
+				code = html_url[html_url.rindex('/')+1..html_url.size]
+				Issue.new(code, "Link to code: [#{code}](#{html_url})")
 			end
 		end
 	end

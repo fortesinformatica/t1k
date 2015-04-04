@@ -13,10 +13,7 @@ module T1k
 		end
 
 		def self.update_card card, issue
-			puts "Updating card"
-			card.name = "[##{issue.code}] #{card.name}"
-			card.desc = "#{issue.link} #{card.desc}"
-			card.save
+			self.adapter.update_card(card, issue)
 		end
 
 		def self.adapter=(adapter_name)

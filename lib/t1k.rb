@@ -1,3 +1,5 @@
+require 't1k/engine'
+
 module T1k
 	autoload :Repository, 't1k/repository'
 	autoload :Tracker, 		't1k/tracker'
@@ -11,7 +13,6 @@ module T1k
 		autoload :Trello, 	't1k/trackers/trello'
 		autoload :Pivotal, 	't1k/trackers/pivotal'
 	end
-
 
 	mattr_accessor :repository
 	@@repository = T1k::Repository

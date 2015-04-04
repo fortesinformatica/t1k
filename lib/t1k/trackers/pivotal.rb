@@ -15,6 +15,9 @@ module T1k
 
 			# implement get_card method
 			# def self.get_card(url_card); end
+
+			# implement get_card method
+			# def self.update_card(card, issue); end
 		end
 	end
 end

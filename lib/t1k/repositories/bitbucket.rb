@@ -15,6 +15,9 @@ module T1k
 
 			# implement create_issue method
 			# def self.create_issue(title); end
+
+			# implement create_issue method
+			# def self.get_issue(html_url); end
 		end
 	end
 end
