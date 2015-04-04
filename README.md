@@ -25,7 +25,7 @@ rake t1k:ship
 
 
 ### Note
-If you use `zsh` in your terminal, add the following alias to `~/.zshrc` file:
+If you use `zsh` in your command line, add the following alias to `~/.zshrc` file:
 ```ruby
 alias rake='noglob rake'
 ```
@@ -65,7 +65,7 @@ end
 
 When you use `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
 
-When you use `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name.
+When you use `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
 
 
 ### License
