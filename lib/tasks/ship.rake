@@ -2,7 +2,7 @@ require 'rake'
 
 #rake t1k:ship
 namespace :t1k do
-  desc "Faz merge com o master e pusha"
+  desc "It merges the current branch with master and push"
 
   task :ship do |t, args|
   	branch = `git branch | grep '*' | awk '{print $2}'`

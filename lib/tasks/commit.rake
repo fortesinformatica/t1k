@@ -2,7 +2,7 @@ require 'rake'
 
 #rake t1k:commit['comentario do commit',close]
 namespace :t1k do
-  desc "Commita com a info da issue para vincular ao github"
+  desc "Commit using issue's info to track it down with github"
 
   task :commit, [:comment, :close] do |t, args|
   	closed = args[:close] == 'close' ? "close " : ""

@@ -2,7 +2,7 @@ require 'rake'
 
 #rake t1k:sink
 namespace :t1k do
-  desc "Sincroniza branch atual com o master"
+  desc "Sync current branch with master"
 
   task :sink do |t, args|
   	branch = `git branch | grep '*' | awk '{print $2}'`
