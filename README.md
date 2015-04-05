@@ -5,7 +5,7 @@
 
 T1K - Automated Git and Trello Workflow
 
-Use those scripts to create automatically branchs associated with issues and tracked commits.
+Use those scripts to automatically create branchs associated with issues and tracked commits with cards on Trello.
 
 
 ## Getting started
@@ -16,8 +16,7 @@ T1k 1.0 works with Rails 4.0.0 onwards. You can add it to your Gemfile with:
 gem 't1k', git: 'https://github.com/fortesinformatica/t1k.git', tag: 'v1.0.1'
 ```
 
-
-T1k will create some tasks to use in your project. (Between others... hahahah :joy:)
+T1k allow you to use some rake tasks to make easy to create brach, commit, create an issue and track it down in a Trello's card.
 
 ```ruby
 rake t1k:hack['TRACKER_CARD_IDENTIFIER']
@@ -66,12 +65,20 @@ T1k.setup do |config|
 end
 ```
 
-When you use `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
+When using `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
 
-When you use `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
+When using `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
 
 
 ### License
 
-Just show me the code :see_no_evil: :stuck_out_tongue_closed_eyes:
+MIT License (MIT)
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
