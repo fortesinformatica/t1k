@@ -20,8 +20,8 @@ gem 't1k', git: 'https://github.com/fortesinformatica/t1k.git', tag: 'v1.0.1'
 T1k will create some tasks to use in your project. (Between others... hahahah :joy:)
 
 ```ruby
-rake t1k:hack
-rake t1k:commit
+rake t1k:hack['TRACKER_CARD_IDENTIFIER']
+rake t1k:commit['COMMIT_COMMENT'[, close]]
 rake t1k:sink
 rake t1k:ship
 ```
