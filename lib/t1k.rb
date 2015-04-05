@@ -28,7 +28,6 @@ module T1k
 	def self.hack url_card
 		card = tracker.get_card(url_card)
 		issue = repository.get_issue(repository.create_issue(card.name).html_url)
-
 		tracker.update_card(card, issue)
 		puts "Card ##{issue.code} created and tracked"
 		issue.code

@@ -6,14 +6,7 @@ module T1k
 
 		def self.setup &block
 			self.adapter.setup(&block) if block_given?
-		end
-
-		def self.create_issue title
-			self.adapter.create_issue(title)
-		end
-
-		def self.get_issue html_url
-			self.adapter.get_issue(html_url)
+			self.delegate(:create_issue, :get_issue, to: self.adapter)
 		end
 
 		def self.adapter=(adapter_name)

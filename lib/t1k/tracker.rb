@@ -6,14 +6,7 @@ module T1k
 
 		def self.setup &block
 			self.adapter.setup(&block) if block_given?
-		end
-
-		def self.get_card url_card
-			self.adapter.get_card(url_card)
-		end
-
-		def self.update_card card, issue
-			self.adapter.update_card(card, issue)
+			self.delegate(:get_card, :update_card, to: self.adapter)
 		end
 
 		def self.adapter=(adapter_name)
