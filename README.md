@@ -10,7 +10,7 @@ Use those scripts to create automatically branchs associated with issues and tra
 T1k 1.0 works with Rails 4.0.0 onwards. You can add it to your Gemfile with:
 
 ```ruby
-gem 't1k', '~> 1.0'
+gem 't1k', git: 'https://github.com/fortesinformatica/t1k.git', tag: 'v1.0.1'
 ```
 
 
