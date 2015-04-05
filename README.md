@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/fortesinformatica/t1k/badges/gpa.svg)](https://codeclimate.com/github/fortesinformatica/t1k)
+
+
 # t1k
 
 T1K - Automated Git and Trello Workflow
