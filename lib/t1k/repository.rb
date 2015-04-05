@@ -4,9 +4,12 @@ module T1k
 		cattr_accessor :adapter
 		@@adapter = T1k::Repositories::Github # default adapter
 
+		class << self
+			delegate :create_issue, :get_issue, to: @@adapter
+		end
+
 		def self.setup &block
 			self.adapter.setup(&block) if block_given?
-			self.delegate(:create_issue, :get_issue, to: self.adapter)
 		end
 
 		def self.adapter=(adapter_name)
