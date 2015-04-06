@@ -30,7 +30,16 @@ module T1k
 				begin
 					puts "Creating issue"
 					github_auth = ::Github.new(oauth_token: self.oauth_token)
-					issue = github_auth.issues.create(user: self.user, repo: self.repo, title: title)
+
+					existent_issue_match = title.match /^\[#([0-9]*)\]/
+					existent_issue = existent_issue_match[1] if existent_issue_match.present?
+
+					if existent_issue.present?
+						issue = github_auth.issues.get user: self.user, self.repo, number: existent_issue
+					else
+						issue = github_auth.issues.create user: self.user, repo: self.repo, title: title
+					end
+		
 					issue
 				rescue
 					raise 'Issue not created'
