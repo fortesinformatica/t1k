@@ -20,7 +20,7 @@ T1k allow you to use some rake tasks to make easy to create brach, commit, creat
 
 ```ruby
 rake t1k:hack['TRACKER_CARD_IDENTIFIER']
-rake t1k:commit['COMMIT_COMMENT'[, close]]
+rake t1k:commit['COMMIT_COMMENT'[,close]]
 rake t1k:sink
 rake t1k:ship
 ```
