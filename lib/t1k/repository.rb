@@ -5,7 +5,7 @@ module T1k
 		@@adapter = T1k::Repositories::Github # default adapter
 
 		class << self
-			delegate :create_issue, :get_issue, to: @@adapter
+			delegate :create_issue, :get_issue, :get_issue_number, to: @@adapter
 		end
 
 		def self.setup &block

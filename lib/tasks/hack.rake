@@ -9,6 +9,12 @@ namespace :t1k do
 
 		system 'git checkout master'
 		system 'git pull --rebase origin master'
-		system "git checkout -b #{code_card}"
+		existent_branch = `git branch --list #{code_card}`
+
+		if existent_branch.present?
+			system "git checkout #{code_card}"
+		else
+			system "git checkout -b #{code_card}"
+		end
   end
 end
