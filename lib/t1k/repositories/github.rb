@@ -35,7 +35,7 @@ module T1k
 					existent_issue = existent_issue_match[1] if existent_issue_match.present?
 
 					if existent_issue.present?
-						issue = github_auth.issues.get user: self.user, self.repo, number: existent_issue
+						issue = github_auth.issues.get user: self.user, repo: self.repo, number: existent_issue
 					else
 						issue = github_auth.issues.create user: self.user, repo: self.repo, title: title
 					end
