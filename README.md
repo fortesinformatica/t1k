@@ -13,7 +13,7 @@ Use those scripts to automatically create branchs associated with issues and tra
 T1k 1.0 works with Rails 4.0.0 onwards. You can add it to your Gemfile with:
 
 ```ruby
-gem 't1k', git: 'https://github.com/fortesinformatica/t1k.git', tag: 'v1.0.1'
+gem 't1k'
 ```
 
 T1k allow you to use some rake tasks to make easy to create brach, commit, create an issue and track it down in a Trello's card.
