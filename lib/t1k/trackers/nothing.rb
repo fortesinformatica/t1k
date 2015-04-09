@@ -1,6 +1,6 @@
 module T1k
 	module Trackers
-		class Anything
+		class Nothing
 			
 			Card = Struct.new(:name)
 

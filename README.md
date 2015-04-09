@@ -42,7 +42,7 @@ T1k.setup do |config|
   # config.repository.adapter = :github
 
   # Change the tracker adapter. Default is trello.
-  # if you not use any bugtraker, change to :anything
+  # if you not use any bugtraker, change to :nothing
   # config.tracker.adapter = :trello
 
   # Configuring your repository
