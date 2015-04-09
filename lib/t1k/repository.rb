@@ -1,11 +1,18 @@
 module T1k
 	class Repository
-
 		cattr_accessor :adapter
 		@@adapter = T1k::Repositories::Github # default adapter
 
-		class << self
-			delegate :create_issue, :get_issue, :get_issue_number, to: @@adapter
+		def self.create_issue card_name
+			adapter.create_issue card_name
+		end
+
+		def self.get_issue existent_issue_number
+			adapter.get_issue existent_issue_number
+		end
+
+		def self.get_issue_number issue
+			adapter.get_issue_number issue
 		end
 
 		def self.setup &block

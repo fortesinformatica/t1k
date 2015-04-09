@@ -1,11 +1,14 @@
 module T1k
 	class Tracker
-
 		cattr_accessor :adapter
 		@@adapter = T1k::Trackers::Trello # default adapter
 
-		class << self
-			delegate :get_card, :update_card, to: @@adapter
+		def self.get_card url_card
+			adapter.get_card url_card
+		end
+
+		def self.update_card card, issue_number
+			adapter.update_card card, issue_number
 		end
 
 		def self.setup &block
