@@ -3,6 +3,7 @@ require 't1k/commands/hack'
 
 module T1k
   INIT = "init"
+  HACK = "hack"
 
   class Command
 
@@ -11,7 +12,7 @@ module T1k
     end
 
     def run
-      puts T1k.setup_credentials
+      T1k.setup_credentials
 
       @args.count == 0 ? help : parse_args(@args)
     end
@@ -19,7 +20,7 @@ module T1k
     def help
       puts "T1K (T-100) Gem. It's a help and let's learn"
       puts ""
-      puts "t1k [command] [params]"
+      puts "t1k [command] <params>"
       puts ""
       puts T1k::Commands::Init.help
       puts T1k::Commands::Hack.help
@@ -31,6 +32,7 @@ module T1k
       command = args[0]
 
       T1k::Commands::Init.run if command == INIT && args.count == 1
+      T1k::Commands::Hack.run(args[1]) if command == HACK && args.count == 2
     end
   end
 end

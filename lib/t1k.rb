@@ -1,7 +1,8 @@
 require 't1k/version'
 require 't1k/command'
 require 'pathname'
-require 'active_support/core_ext/module'
+require 'active_support/core_ext/module/delegation'
+require 'active_support/core_ext/module/attribute_accessors'
 
 module T1k
   autoload :Repository, 't1k/repository'

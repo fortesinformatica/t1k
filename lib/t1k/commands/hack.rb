@@ -17,7 +17,7 @@ module T1k
       end
 
       def self.help
-        "hack - TODO"
+        "hack <card_identifier> - creates a branch associated with a card and checkout to it"
       end
     end
   end
