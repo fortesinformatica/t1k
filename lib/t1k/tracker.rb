@@ -3,16 +3,8 @@ module T1k
 		cattr_accessor :adapter
 		@@adapter = T1k::Trackers::Trello # default adapter
 
-		def self.get_card url_card
-			adapter.get_card url_card
-		end
-
-		def self.update_card card, issue_number
-			adapter.update_card card, issue_number
-		end
-
-		def self.setup &block
-			self.adapter.setup(&block) if block_given?
+		class << self
+			delegate :setup, :get_card, :update_card, to: :adapter
 		end
 
 		def self.adapter=(adapter_name)
