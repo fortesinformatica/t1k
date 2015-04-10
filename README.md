@@ -1,39 +1,113 @@
-# T1k
+# T1K [![Code Climate](https://codeclimate.com/github/fortesinformatica/t1k/badges/gpa.svg)](https://codeclimate.com/github/fortesinformatica/t1k)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/t1k`. To experiment with that code, run `bin/console` for an interactive prompt.
+T1K - Automated Git and Trello Workflow
 
-TODO: Delete this and the text above, and describe your gem
+Use those scripts to automatically create branchs associated with issues and tracked commits with cards on Trello.
 
-## Installation
+T1k allow you from command line to use some tasks to make easy to create brach, commit, create an issue and track it down in a Trello's card.
 
-Add this line to your application's Gemfile:
+- [T1K](#t1k)
+  - [Getting started](#getting-started)
+    - [T1000 Configuration File](#t1000-configuration-file)
+  - [Commands](#commands)
+    - [Init](#init)
+    - [Commit](#commit)
+    - [Sink](#sink)
+    - [Ship](#ship)
+  - [License](#license)
+
+## Getting started
+
+Install in your system T1k's gem
 
 ```ruby
-gem 't1k'
+$ gem install t1k
 ```
 
-And then execute:
+Start using t1k into your project directory
 
-    $ bundle
+```shell
+$ t1k init
+```
 
-Or install it yourself as:
+It creates the T1000 configuration file inside your project folder.
 
-    $ gem install t1k
+### T1000 Configuration File
+Here is a possible configuration for `github` and `trello`.
+Your `T1000` should look like this:
 
-## Usage
+```ruby
+T1k.setup do |config|
+  # Change the repository adapter. Default is github.
+  # config.repository.adapter = :github
 
-TODO: Write usage instructions here
+  # Change the tracker adapter. Default is trello.
+  # config.tracker.adapter = :trello
 
-## Development
+  # Configuring your repository
+  config.repository.setup do |c|
+    # https://github.com/settings/applications
+    # Personal access tokens
+    c.oauth_token = 'PERSONAL_ACCESS_TOKEN'
+    c.user = 'YOUR_REPOSITORY_USERNAME'
+    c.repo = 'YOUR_REPOSITORY_NAME'
+  end
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+  # Configuring your tracker
+  config.tracker.setup do |c|
+    # https://trello.com/app-key
+    # https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
+    c.developer_public_key = 'PUBLIC_KEY'
+    c.member_token = 'APP_MEMBER_TOKEN'
+    c.user_name = 'YOUR_TRELLO_USER'
+    c.board_name = 'BOARD_NAME'
+  end
+end
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+When using `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
 
-## Contributing
+When using `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
 
-1. Fork it ( https://github.com/[my-github-username]/t1k/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+## Commands
+
+Basic workflow:
+
+```shell
+$ t1k commit -m 'commit message'
+$ t1k commit -m 'finish issue and close it' -c
+$ t1k sink
+$ t1k ship
+```
+
+### Init
+
+Just adds to your project folder a T1000 config file template
+
+### Commit
+
+Commit has to params options, -m and -c.
+
+1. `t1k commit` : just commits your staged changes (no message is added) *not recommended*
+2. `t1k commit -m 'message'` : commits your staged changes with a custom message
+2. `t1k commit -c -m 'message'` : -c is used to close your issue.
+
+### Sink
+
+Just _sync_ with master your current branch
+
+### Ship
+
+It deliveries to master (local and remote) your branch and changes current branch to master
+
+## License
+
+MIT License (MIT)
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
