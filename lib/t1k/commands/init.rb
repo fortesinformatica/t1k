@@ -12,7 +12,10 @@ module T1k
       end
 
       def self.help
-        "init - Initialize a project with T1000 configuration file."
+        <<-DESC
+        init - Creates T1000 file into your project folder.
+          Setup your keys and other configurations in this file.
+        DESC
       end
     end
   end

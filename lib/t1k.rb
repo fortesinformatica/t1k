@@ -3,6 +3,7 @@ require 't1k/command'
 require 'pathname'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/module/attribute_accessors'
+require 'active_support/inflector'
 
 module T1k
   autoload :Repository, 't1k/repository'

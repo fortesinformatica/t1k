@@ -1,9 +1,11 @@
 require 't1k/commands/init'
 require 't1k/commands/hack'
+require 't1k/commands/commit'
 
 module T1k
   INIT = "init"
   HACK = "hack"
+  COMMIT = "commit"
 
   class Command
 
@@ -24,6 +26,7 @@ module T1k
       puts ""
       puts T1k::Commands::Init.help
       puts T1k::Commands::Hack.help
+      puts T1k::Commands::Commit.help
     end
 
     private
@@ -33,6 +36,7 @@ module T1k
 
       T1k::Commands::Init.run if command == INIT && args.count == 1
       T1k::Commands::Hack.run(args[1]) if command == HACK && args.count == 2
+      T1k::Commands::Commit.run(args[1..args.count]) if command == COMMIT
     end
   end
 end
