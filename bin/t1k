@@ -2,7 +2,5 @@
 
 require 't1k'
 
-puts ARGV
-
 command = T1k::Command.new(ARGV)
 command.run
