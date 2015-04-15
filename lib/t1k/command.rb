@@ -24,7 +24,7 @@ module T1k
     end
 
     def help
-      puts "T1K (T-100) Gem. It's a help and let's learn"
+      puts "T1K (T-1000) Gem. It's a help and let's learn"
       puts ""
       puts "t1k [command] <params>"
       puts ""
