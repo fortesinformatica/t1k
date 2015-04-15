@@ -74,6 +74,7 @@ When using `:trello` as your tracker, you must define `:developer_public_key`, `
 Basic workflow:
 
 ```shell
+$ t1k hack yk2adi9
 $ t1k commit -m 'commit message'
 $ t1k commit -m 'finish issue and close it' -c
 $ t1k sink
@@ -83,6 +84,12 @@ $ t1k ship
 ### Init
 
 Just adds to your project folder a T1000 config file template
+
+### Hack
+
+When you type `$ t1k hack 18asd92` t1k creates or switches to a branch associated to a card.
+
+* Where `18asd92` can be the card identifier or any url part of its.
 
 ### Commit
 
