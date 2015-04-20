@@ -29,18 +29,16 @@ module T1k
 			end
 
 			def self.get_card url_card
-				begin
-					puts "Catching card"
+				puts "Catching card"
 
-					me = ::Trello::Member.find(self.user_name)
-					board = me.boards.select{|x| x.name.upcase == self.board_name.upcase}.first
-					card = board.cards.select{|x| x.url.index(url_card)}.first
-					raise if card.nil?
+				me = ::Trello::Member.find(self.user_name)
+				raise "User not found" if me.nil?
+				board = me.boards.select{|x| x.name.upcase == self.board_name.upcase}.first
+				raise "Board not found.\nBoards available: #{me.boards.map(&:name)}" if board.nil?
+				card = board.cards.select{|x| x.url.index(url_card)}.first
+				raise "Card not found" if card.nil?
 
-					card
-				rescue
-					raise 'Card not found'
-				end
+				card
 			end
 
 			def self.update_card card, issue
