@@ -43,24 +43,30 @@ T1k.setup do |config|
 
   # Change the tracker adapter. Default is trello.
   # config.tracker.adapter = :trello
+  # Setup Github repository credentials
 
-  # Configuring your repository
+  Create an auth_token here: https://github.com/settings/applications
+
+  config.repository.adapter = :github
   config.repository.setup do |c|
-    # https://github.com/settings/applications
-    # Personal access tokens
-    c.oauth_token = 'PERSONAL_ACCESS_TOKEN'
-    c.user = 'YOUR_REPOSITORY_USERNAME'
-    c.repo = 'YOUR_REPOSITORY_NAME'
+    c.user_name = "GITHUB_USER"
+    c.repo = "REPOSITORY_NAME"
+    c.oauth_token = "YOUR_GITHUB_AUTH_TOKEN"
   end
 
-  # Configuring your tracker
-  config.tracker.setup do |c|
-    # https://trello.com/app-key
-    # https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
-    c.developer_public_key = 'PUBLIC_KEY'
-    c.member_token = 'APP_MEMBER_TOKEN'
-    c.user_name = 'YOUR_TRELLO_USER'
-    c.board_name = 'BOARD_NAME'
+  # Setup Trello board credentials
+  #
+  # Trello APP_DEVELOPER_KEY: https://trello.com/app-key
+  # Trello App permission key: https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
+  #
+  T1k.setup do |config|
+   config.tracker.adapter = :trello
+   config.tracker.setup do |c|
+     c.user_name = "TRELLO_USER"
+     c.board_name = "TRELLO_BOARD_NAME"
+     c.app_token = "TRELLO_APP_TOKEN"
+     c.developer_public_key = "TRELLO_DEVELOPER_PUB_KEY"
+   end
   end
 end
 ```
