@@ -1,3 +1,0 @@
-= T1k
-
-This project rocks and uses MIT-LICENSE.
