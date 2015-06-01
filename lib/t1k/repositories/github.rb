@@ -13,17 +13,26 @@ module T1k
       cattr_accessor :repo
       @@repo = ""
 
+      cattr_accessor :messages
+      @@messages = []
+      cattr_accessor :errors
+      @@errors = []
+
       Issue = Struct.new(:code, :link)
 
       def self.setup &block
         yield(self) if block_given?
-        self.config_keys
       end
 
-      def self.config_keys
-        # ::Github.configure do |config|
-          # your keys
-        # end
+      def self.valid_keys?
+        begin
+          me = ::Github.new(oauth_token: self.oauth_token).users.get
+          @@messages << "Wecolme #{me.name} - Github"
+          return true
+        rescue Exception => e
+          @@errors << e.message
+          return false
+        end
       end
 
       def self.create_issue title

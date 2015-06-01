@@ -16,6 +16,12 @@ module T1k
       cattr_accessor :board_name
       @@board_name = ""
 
+      cattr_accessor :messages
+      @@messages = []
+
+      cattr_accessor :errors
+      @@errors = []
+
       def self.setup &block
         yield(self) if block_given?
         self.config_keys
@@ -25,6 +31,17 @@ module T1k
         ::Trello.configure do |config|
           config.developer_public_key = self.developer_public_key
           config.member_token = self.member_token
+        end
+      end
+
+      def self.valid_keys?
+        begin
+          me = ::Trello::Member.find(self.user_name)
+          @@messages << "Welcome #{me.full_name} - Trello"
+          return true
+        rescue Exception => e
+          @@errors << e.message
+          return false
         end
       end
 

@@ -1,3 +1,4 @@
+require 't1k/commands/validate'
 require 't1k/commands/init'
 require 't1k/commands/hack'
 require 't1k/commands/commit'
@@ -5,46 +6,61 @@ require 't1k/commands/sink'
 require 't1k/commands/ship'
 
 module T1k
-  INIT = "init"
-  HACK = "hack"
-  COMMIT = "commit"
-  SINK = "sink"
-  SHIP = "ship"
-
-  class Command
-
-    def initialize(argv)
-      @args = argv
+  class CLI < Clive
+    desc 'Create T1000 credentials file template in your current folder'
+    command :init, :setup do
+      action do
+        Commands::Init.run
+      end
     end
 
-    def run
-      T1k.setup_credentials
-
-      @args.count == 0 ? help : parse_args(@args)
+    desc 'Validate current credentials'
+    command :validate do
+      action do
+        Commands::Validate.run
+      end
     end
 
-    def help
-      puts "T1K (T-1000) Gem. It's a help and let's learn"
-      puts ""
-      puts "t1k [command] <params>"
-      puts ""
-      puts T1k::Commands::Init.help
-      puts T1k::Commands::Hack.help
-      puts T1k::Commands::Commit.help
-      puts T1k::Commands::Sink.help
-      puts T1k::Commands::Ship.help
+    desc 'Checkout to a new branch or existing branch associated with tracked card (issue)'
+    command :hack, :hck, arg: '<card_url>' do
+      action do
+        Commands::Hack.run card_url
+      end
     end
 
-    private
+    desc 'Commit current staged changes'
+    command :commit, :cmt do
+      bool :close, :c, 'Close current branch and resolves issue' do |close|
+        @close = close
+      end
 
-    def parse_args(args)
-      command = args[0]
+      opt :message, :m, 'Add a message to the commit', arg: '<message>' do
+        @message = message
+      end
 
-      T1k::Commands::Init.run if command == INIT && args.count == 1
-      T1k::Commands::Hack.run(args[1]) if command == HACK && args.count == 2
-      T1k::Commands::Commit.run(args[1..args.count]) if command == COMMIT
-      T1k::Commands::Sink.run if command == SINK && args.count == 1
-      T1k::Commands::Ship.run if command == SHIP && args.count == 1
+      action do
+        Commands::Commit.run @message, @close
+      end
+    end
+
+    desc 'Update current branch with master (ie Sync with master)'
+    command :sink, :sync do
+
+      action do
+        Commands::Sink.run
+      end
+    end
+
+    desc 'Delivery your changes to local and remote master branch'
+    command :ship, :pack, :deliver do
+
+      action do
+        Commands::Ship.run
+      end
+    end
+
+    opt :v, :version, 'Display the current version' do
+      puts T1k::VERSION
     end
   end
 end

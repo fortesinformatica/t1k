@@ -1,9 +1,14 @@
-require 't1k/version'
-require 't1k/command'
-require 'pathname'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/module/attribute_accessors'
 require 'active_support/inflector'
+require 'pathname'
+
+require 'clive'
+require 'clive/output'
+
+require 't1k/version'
+require 't1k/constants'
+require 't1k/command'
 
 module T1k
   autoload :Repository, 't1k/repository'
@@ -26,7 +31,7 @@ module T1k
   @@tracker = T1k::Tracker
 
   mattr_accessor :tthousand_path
-  @@tthousand_path = Pathname.pwd + 'T1000'
+  @@tthousand_path = Pathname.pwd + T1000
 
   def self.setup &block
     yield(self) if block_given?

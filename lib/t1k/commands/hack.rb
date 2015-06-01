@@ -3,6 +3,7 @@ module T1k
     class Hack
 
       def self.run(path_card_part)
+        T1k.setup_credentials
         code_card = T1k::hack path_card_part
 
         system 'git checkout master'
@@ -14,12 +15,6 @@ module T1k
         else
           system "git checkout -b #{code_card}"
         end
-      end
-
-      def self.help
-        <<-DESC
-        hack <card_identifier> - creates a branch associated with a card and checkout to it.
-        DESC
       end
     end
   end
