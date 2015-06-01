@@ -5,11 +5,7 @@ module T1k
     @@adapter = T1k::Trackers::Trello # default adapter
 
     class << self
-      delegate :get_card, :update_card, to: @@adapter
-    end
-
-    def self.setup &block
-      self.adapter.setup(&block) if block_given?
+      delegate :setup, :get_card, :update_card, to: :adapter
     end
 
     def self.adapter=(adapter_name)

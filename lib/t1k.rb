@@ -20,6 +20,7 @@ module T1k
   end
 
   module Trackers
+    autoload :None,  't1k/trackers/none'
     autoload :Trello,   't1k/trackers/trello'
     autoload :Pivotal,  't1k/trackers/pivotal'
   end

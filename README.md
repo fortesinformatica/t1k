@@ -10,7 +10,10 @@ T1k allow you from command line to use some tasks to make easy to create brach, 
   - [Getting started](#getting-started)
     - [T1000 Configuration File](#t1000-configuration-file)
   - [Commands](#commands)
+    - [Help](#help)
+    - [Validate](#validate)
     - [Init](#init)
+    - [Hack](#hack)
     - [Commit](#commit)
     - [Sink](#sink)
     - [Ship](#ship)
@@ -45,7 +48,7 @@ T1k.setup do |config|
   # config.tracker.adapter = :trello
   # Setup Github repository credentials
 
-  Create an auth_token here: https://github.com/settings/applications
+  # Create an auth_token here: https://github.com/settings/applications
 
   config.repository.adapter = :github
   config.repository.setup do |c|
@@ -60,7 +63,7 @@ T1k.setup do |config|
   # Trello App permission key: https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
   #
   T1k.setup do |config|
-   config.tracker.adapter = :trello
+   config.tracker.adapter = [:trello, :pivotal, :none]
    config.tracker.setup do |c|
      c.user_name = "TRELLO_USER"
      c.board_name = "TRELLO_BOARD_NAME"
@@ -71,13 +74,17 @@ T1k.setup do |config|
 end
 ```
 
-When using `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
+Get your [Trello APP_DEVELOPER_KEY](https://trello.com/app-key)
 
-When using `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
+Get your `app_token` - https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
+
+* When using `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
+* When using `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
+* When using `:none` as your tracker, T1k will create issues with the name passed as argument on `t1k hack <issue-name>`
 
 ## Commands
 
-Basic workflow:
+Basic workflow with Trello as Tracker:
 
 ```shell
 $ t1k hack yk2adi9
@@ -87,9 +94,34 @@ $ t1k sink
 $ t1k ship
 ```
 
+### Help
+
+`t1k --help`
+
+```
+Usage: t1k [command] [options]
+
+  Commands:
+    commit,cmt                                          # Commit current staged changes
+    hack,hck <card_url>                                 # Checkout to a new branch or existing branch associated with tracked card (issue)
+    init,setup                                          # Create T1000 credentials file template in your current folder
+    ship,pack,deliver                                   # Delivery your changes to local and remote master branch
+    sink,sync                                           # Update current branch with master (ie Sync with master)
+    validate                                            # Validate current credentials
+    help [<command>]                                    # Display help
+
+  Options:
+    -v, --version                                       # Display the current version
+    -h, --help                                          # Display this help message
+```
+
+### Validate
+
+Validates your current credentials stored in `T1000` file
+
 ### Init
 
-Just adds to your project folder a T1000 config file template
+Just adds to your project folder a `T1000` config file template
 
 ### Hack
 
@@ -101,9 +133,18 @@ When you type `$ t1k hack 18asd92` t1k creates or switches to a branch associate
 
 Commit has to params options, -m and -c.
 
+```
+Usage: t1k commit,cmt [options]
+
+  Options:
+    -c, --[no-]close                                    # Close current branch and resolves issue
+    -m, --message <message>                             # Add a message to the commit
+    -h, --help                                          # Display this help message
+```
+
 1. `t1k commit` : just commits your staged changes (no message is added) *not recommended*
 2. `t1k commit -m 'message'` : commits your staged changes with a custom message
-2. `t1k commit -c -m 'message'` : -c is used to close your issue.
+2. `t1k commit -c -m 'message'` : `-c` is used to close your issue.
 
 ### Sink
 

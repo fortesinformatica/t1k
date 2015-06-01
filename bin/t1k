@@ -4,6 +4,8 @@ require 't1k'
 
 begin
   T1k::CLI.run ARGV
-rescue Clive::Parser::MissingArgumentError => e
-  puts e.message.red
+rescue Clive::Parser::MissingArgumentError => argument_error
+  puts argument_error.message.red
+rescue RuntimeError => error
+  puts error.message.red
 end
