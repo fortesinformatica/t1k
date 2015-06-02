@@ -52,7 +52,7 @@ T1k.setup do |config|
 
   config.repository.adapter = :github
   config.repository.setup do |c|
-    c.user_name = "GITHUB_USER"
+    c.user = "GITHUB_USER"
     c.repo = "REPOSITORY_NAME"
     c.oauth_token = "YOUR_GITHUB_AUTH_TOKEN"
   end
@@ -62,14 +62,12 @@ T1k.setup do |config|
   # Trello APP_DEVELOPER_KEY: https://trello.com/app-key
   # Trello App permission key: https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
   #
-  T1k.setup do |config|
-   config.tracker.adapter = [:trello, :pivotal, :none]
-   config.tracker.setup do |c|
-     c.user_name = "TRELLO_USER"
-     c.board_name = "TRELLO_BOARD_NAME"
-     c.app_token = "TRELLO_APP_TOKEN"
-     c.developer_public_key = "TRELLO_DEVELOPER_PUB_KEY"
-   end
+  config.tracker.adapter = [:trello, :pivotal, :none]
+  config.tracker.setup do |c|
+    c.user_name = "TRELLO_USER"
+    c.board_name = "TRELLO_BOARD_NAME"
+    c.member_token = "TRELLO_APP_TOKEN"
+    c.developer_public_key = "TRELLO_DEVELOPER_PUB_KEY"
   end
 end
 ```
