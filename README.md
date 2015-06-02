@@ -74,7 +74,7 @@ end
 
 Get your [Trello APP_DEVELOPER_KEY](https://trello.com/app-key)
 
-Get your `app_token` - https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
+Get your `member_token` - https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
 
 * When using `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
 * When using `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
