@@ -34,12 +34,20 @@ module T1k
         @close = close
       end
 
+      bool :all, :a, 'Add all changed files' do |add|
+        @add = add
+      end
+
+      bool :no_message, 'Allow commit with no message' do |no_message|
+        @no_message = no_message
+      end
+
       opt :message, :m, 'Add a message to the commit', arg: '<message>' do
         @message = message
       end
 
       action do
-        Commands::Commit.run @message, @close
+        Commands::Commit.run @message, @close, @add, @no_message
       end
     end
 
