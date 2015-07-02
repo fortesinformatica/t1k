@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ruby-trello', '~> 1.2.1'
   spec.add_dependency 'github_api', '~> 0.12'
   spec.add_dependency 'activesupport', '~> 4.2'
-  spec.add_dependency 'clive'
+  spec.add_dependency 'clive', '~> 1.2.1'
 end
