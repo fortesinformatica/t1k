@@ -7,7 +7,7 @@ module T1k
       def self.setup &block
       end
 
-      def self.get_card title
+      def self.get_card title, board=nil
         Card.new title
       end
 

@@ -23,8 +23,13 @@ module T1k
 
     desc 'Checkout to a new branch or existing branch associated with tracked card (issue)'
     command :hack, :hck, arg: '<card_url>' do
+
+      opt :board, :b, 'Define the specified board to search the card', arg: '<board_name>' do
+        @board = board_name
+      end
+
       action do
-        Commands::Hack.run card_url
+        Commands::Hack.run card_url, @board
       end
     end
 

@@ -45,12 +45,14 @@ module T1k
         end
       end
 
-      def self.get_card url_card
-        puts "Fetching card"
+      def self.get_card url_card, board=nil
+        my_board = board || self.board_name
+
+        puts "Fetching card from #{my_board}"
         begin
           me = ::Trello::Member.find(self.user_name)
           raise "User not found" if me.nil?
-          board = me.boards.select{|x| x.name.upcase == self.board_name.upcase}.first
+          board = me.boards.select{|x| x.name.upcase == my_board.upcase}.first
           raise "Board not found.\nBoards available: #{me.boards.map(&:name)}" if board.nil?
           card = board.cards.select{|x| x.url.index(url_card)}.first
           raise "Card not found" if card.nil?
