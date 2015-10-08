@@ -2,9 +2,9 @@ module T1k
   module Commands
     class Hack
 
-      def self.run(path_card_part)
-        T1k.setup_credentials
-        code_card = T1k::hack path_card_part
+      def self.run path_card_part, card_name, card_desc
+        T1k::setup_credentials
+        code_card = T1k::hack path_card_part, card_name, card_desc
 
         system 'git checkout master'
         system 'git pull --rebase origin master'

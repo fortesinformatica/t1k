@@ -38,8 +38,8 @@ module T1k
     yield(self) if block_given?
   end
 
-  def self.hack url_card
-    card = tracker.get_card(url_card)
+  def self.hack url_card, card_name, card_desc
+    card = url_card.nil? ? tracker.new_card card_name, card_desc : tracker.get_card url_card
 
     existent_issue_match = card.name.match /^\[#([0-9]*)\]/
     existent_issue_number = existent_issue_match[1] if existent_issue_match.present?

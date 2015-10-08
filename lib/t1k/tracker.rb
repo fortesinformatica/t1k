@@ -5,7 +5,7 @@ module T1k
     @@adapter = T1k::Trackers::Trello # default adapter
 
     class << self
-      delegate :setup, :get_card, :update_card, to: :adapter
+      delegate :setup, :get_card, :new_card, :update_card, to: :adapter
     end
 
     def self.adapter=(adapter_name)

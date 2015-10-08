@@ -1,7 +1,7 @@
 T1k.setup do |config|
 
   # Setup Github repository credentials
-  # Create an auth_token here: https://github.com/settings/applications
+  # Create an Personal access tokens here: https://github.com/settings/tokens
   #
   # config.repository.adapter = [:github, :bitbucket]
   # config.repository.setup do |c|
@@ -13,7 +13,7 @@ T1k.setup do |config|
   # Setup Trello board credentials
   #
   # Trello APP_DEVELOPER_KEY: https://trello.com/app-key
-  # Trello App permission key: https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
+  # Trello App permission key (member_token): https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
   #
   # config.tracker.adapter = [:trello, :pivotal, :none]
   # config.tracker.setup do |c|

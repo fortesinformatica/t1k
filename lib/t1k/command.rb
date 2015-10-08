@@ -22,9 +22,14 @@ module T1k
     end
 
     desc 'Checkout to a new branch or existing branch associated with tracked card (issue)'
-    command :hack, :hck, arg: '<card_url>' do
+    command :hack, :hck, arg: '[<card_url>]' do
+      opt :new, :n, 'Create a new trackde card with text receipt', arg: '<card_name> [<card_desc>]' do
+        @card_name = card_name
+        @card_desc = card_desc.nil? ? "" : card_desc
+      end
+
       action do
-        Commands::Hack.run card_url
+        Commands::Hack.run card_url, @card_name, @card_desc
       end
     end
 
