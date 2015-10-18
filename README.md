@@ -50,7 +50,7 @@ T1k.setup do |config|
 
   # Create an auth_token here: https://github.com/settings/tokens
 
-  config.repository.adapter = :github
+  config.repository.adapter = :github # default is github
   config.repository.setup do |c|
     c.user = "GITHUB_USER"
     c.repo = "REPOSITORY_NAME"
@@ -62,7 +62,7 @@ T1k.setup do |config|
   # Trello APP_DEVELOPER_KEY: https://trello.com/app-key
   # Trello App permission key: https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
   #
-  config.tracker.adapter = [:trello, :pivotal, :none]
+  config.tracker.adapter = [:trello, :pivotal, :none] # default is trello
   config.tracker.setup do |c|
     c.user_name = "TRELLO_USER"
     c.board_name = "TRELLO_BOARD_NAME"
@@ -74,7 +74,7 @@ end
 
 Get your [Trello APP_DEVELOPER_KEY](https://trello.com/app-key)
 
-Get your `member_token` - https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
+Get your `member_token` - [Trello MEMBER_TOKEN](https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write)
 
 * When using `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
 * When using `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
