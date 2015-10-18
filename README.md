@@ -72,12 +72,8 @@ T1k.setup do |config|
 end
 ```
 
-Get your [Trello APP_DEVELOPER_KEY](https://trello.com/app-key)
-
-Get your `member_token` - [Trello MEMBER_TOKEN](https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write)
-
 * When using `:github` as your repository, you must define `:oauth_token`, `:user`, `:repo`.
-* When using `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`.
+* When using `:trello` as your tracker, you must define `:developer_public_key`, `:member_token`, `:user_name` and `:board_name`. Get your `:developer_public_key` [here](https://trello.com/app-key) and the `:member_token` you must replace your developer key in the url `https://trello.com/1/authorize?key=YOURAPIKEY&response_type=token&expiration=never&scope=read,write`.
 * When using `:none` as your tracker, T1k will create issues with the name passed as argument on `t1k hack <issue-name>`
 
 ## Commands
