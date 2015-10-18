@@ -48,7 +48,7 @@ T1k.setup do |config|
   # config.tracker.adapter = :trello
   # Setup Github repository credentials
 
-  # Create an auth_token here: https://github.com/settings/applications
+  # Create an auth_token here: https://github.com/settings/tokens
 
   config.repository.adapter = :github
   config.repository.setup do |c|
