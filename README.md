@@ -148,6 +148,9 @@ Just _sync_ with master your current branch
 
 It deliveries to master (local and remote) your branch and changes current branch to master
 
+## Contributing
+`#TODO`
+
 ## License
 
 MIT License (MIT)
