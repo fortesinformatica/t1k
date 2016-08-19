@@ -46,9 +46,10 @@ module T1k
     existent_issue_match  = card.name.match /^\[#([0-9]*)\]/
     existent_issue_number = existent_issue_match[1] if existent_issue_match.present?
 
-    issue = existent_issue_number.present? ? repository.get_issue(existent_issue_number).html_url : repository.create_issue(card.name).html_url
+    issue_url = existent_issue_number.present? ? repository.get_issue(existent_issue_number)
+                                               : repository.create_issue(card.name)
 
-    issue_number = repository.get_issue_number(issue)
+    issue_number = repository.get_issue_number(issue_url)
     tracker.update_card(card, issue_number) if existent_issue_number.nil?
 
     puts "Card ##{issue_number.code} created and tracked"
