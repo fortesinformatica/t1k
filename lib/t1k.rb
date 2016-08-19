@@ -10,6 +10,9 @@ require 't1k/version'
 require 't1k/constants'
 require 't1k/command'
 
+
+require_relative '../spec/support/kernel' if ENV["DEBUG"]
+
 module T1k
   autoload :Repository, 't1k/repository'
   autoload :Tracker,    't1k/tracker'
