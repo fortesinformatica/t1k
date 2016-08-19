@@ -14,10 +14,10 @@ module T1k
 
         c = Validate.credentials?
         t = Validate.trello?
-        g = Validate.github?
+        g = Validate.valid_keys_on_repository?
 
-        @@messages = @@messages + Trackers::Trello.messages + Repositories::Github.messages
-        @@errors = @@errors + Trackers::Trello.errors + Repositories::Github.errors
+        @@messages = @@messages + Trackers::Trello.messages + self.default_repository.messages
+        @@errors   = @@errors   + Trackers::Trello.errors   + self.default_repository.errors
 
         @@messages.each do |m| puts m.green end
 
@@ -35,9 +35,14 @@ module T1k
         Trackers::Trello.valid_keys?
       end
 
-      def self.github?
-        Repositories::Github.valid_keys?
+      def self.valid_keys_on_repository?
+        self.default_repository.valid_keys?
       end
+
+      def self.default_repository
+        Repository.default_repository
+      end
+
     end
   end
 end
