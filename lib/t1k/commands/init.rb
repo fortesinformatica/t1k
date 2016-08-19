@@ -22,8 +22,6 @@ module T1k
 
         FileUtils.cp(src, dest)
       end
-
-      private_class_method :create_T1000_file
     end
   end
 end
