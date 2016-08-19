@@ -23,7 +23,7 @@ module T1k
   end
 
   module Trackers
-    autoload :None,  't1k/trackers/none'
+    autoload :None,     't1k/trackers/none'
     autoload :Trello,   't1k/trackers/trello'
     autoload :Pivotal,  't1k/trackers/pivotal'
   end
@@ -42,9 +42,8 @@ module T1k
   end
 
   def self.hack url_card
-    card = tracker.get_card(url_card)
-
-    existent_issue_match = card.name.match /^\[#([0-9]*)\]/
+    card                  = tracker.get_card(url_card)
+    existent_issue_match  = card.name.match /^\[#([0-9]*)\]/
     existent_issue_number = existent_issue_match[1] if existent_issue_match.present?
 
     issue = existent_issue_number.present? ? repository.get_issue(existent_issue_number).html_url : repository.create_issue(card.name).html_url
@@ -53,6 +52,7 @@ module T1k
     tracker.update_card(card, issue_number) if existent_issue_number.nil?
 
     puts "Card ##{issue_number.code} created and tracked"
+
     issue_number.code
   end
 
@@ -62,5 +62,12 @@ module T1k
 
   def self.setup_credentials
     eval(File.read(@@tthousand_path)) if File.exists? @@tthousand_path
+
+    Repository.instance_eval do
+      @@adapter =  self.default_repository
+      class << self
+        delegate :create_issue, :get_issue, :get_issue_number, to: @@adapter
+      end
+    end
   end
 end
