@@ -26,6 +26,9 @@ module T1k
       end
 
       def self.credentials?
+        if self.password_from_bitbucket_is_avaliable?
+          @@messages << "Password is not avaliable"
+        end
         exist = File.exist?(T1k::tthousand_path)
         exist ? @@messages << "T1000 file was found" : @@errors << "T1000 file not found"
         exist
@@ -43,6 +46,9 @@ module T1k
         Repository.default_repository
       end
 
+      def self.password_from_bitbucket_is_avaliable?
+        self.default_repository == T1k::Repositories::Bitbucket and "#{ENV['BITBUCKET_PWD']}".nil?
+      end
     end
   end
 end
