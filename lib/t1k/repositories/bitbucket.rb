@@ -10,6 +10,9 @@ module T1k
       cattr_accessor :repo
       @@repo = ""
 
+      cattr_accessor :repo_owner
+      @@repo_owner = ""
+
       cattr_accessor :password
       @@password = ""
 
@@ -23,9 +26,11 @@ module T1k
 
       def self.create_issue title
         puts 'Creating issue'
-        me           = self.login
-        issue        = me.issues.create(self.user, self.repo, { title: title })
-        issue_number = self.send(:issue_url_from, issue)
+        me                = self.login
+        self.repo_owner   = Bitbucket.get_repo_owner_for me
+
+        issue             = me.issues.create(self.repo_owner, self.repo, { title: title })
+        issue_number      = self.send(:issue_url_from, issue)
 
         issue_number
       end
@@ -41,9 +46,11 @@ module T1k
         end
 
         puts 'Recovering existent issue'
-        me           = self.login
-        issue        = me.issues.find(self.user, self.repo, number )
-        issue_number = self.send(:issue_url_from, issue)
+        me                = self.login
+        self.repo_owner   = Bitbucket.get_repo_owner_for me
+
+        issue             = me.issues.find(self.repo_owner, self.repo, number )
+        issue_number      = self.send(:issue_url_from, issue)
 
         issue_number
       end
@@ -58,11 +65,25 @@ module T1k
 
       private_class_method def self.issue_url_from issue
         issue_number = issue["resource_uri"].match(/issues\/\d+$/)[0] if issue["resource_uri"]
-        issue_url    = "https://bitbucket.org/#{self.user}/#{self.repo}/#{issue_number}"
+        issue_url    = "https://bitbucket.org/#{self.repo_owner}/#{self.repo}/#{issue_number}"
 
         issue_url
       end
 
+      def self.get_repo_owner_for me
+        unless me.kind_of? BitBucket::Client
+          puts "You should pass a valid user."
+          exit 1
+        end
+
+        project = me.repos.all.select {|hash| hash.name == self.repo }
+
+        # /1.0/repositories/OWNER/REPO
+        # > 1.	/repositories/
+        # > 2.	OWNER
+
+        project[0]['resource_uri'].match(/(\/\w+\/)(\w+)/)[2]
+      end
 
       def self.setup &block
         yield(self) if block_given?
