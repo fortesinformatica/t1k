@@ -14,10 +14,10 @@ module T1k
 
         c = Validate.credentials?
         t = Validate.trello?
-        g = Validate.github?
+        g = Validate.valid_keys_on_repository?
 
-        @@messages = @@messages + Trackers::Trello.messages + Repositories::Github.messages
-        @@errors = @@errors + Trackers::Trello.errors + Repositories::Github.errors
+        @@messages = @@messages + Trackers::Trello.messages + self.default_repository.messages
+        @@errors   = @@errors   + Trackers::Trello.errors   + self.default_repository.errors
 
         @@messages.each do |m| puts m.green end
 
@@ -26,6 +26,9 @@ module T1k
       end
 
       def self.credentials?
+        if self.password_from_bitbucket_is_avaliable?
+          @@messages << "Password is not avaliable"
+        end
         exist = File.exist?(T1k::tthousand_path)
         exist ? @@messages << "T1000 file was found" : @@errors << "T1000 file not found"
         exist
@@ -35,8 +38,16 @@ module T1k
         Trackers::Trello.valid_keys?
       end
 
-      def self.github?
-        Repositories::Github.valid_keys?
+      def self.valid_keys_on_repository?
+        self.default_repository.valid_keys?
+      end
+
+      def self.default_repository
+        Repository.default_repository
+      end
+
+      def self.password_from_bitbucket_is_avaliable?
+        self.default_repository == T1k::Repositories::Bitbucket and "#{ENV['BITBUCKET_PWD']}".nil?
       end
     end
   end

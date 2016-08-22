@@ -30,7 +30,7 @@ module T1k
       def self.config_keys
         ::Trello.configure do |config|
           config.developer_public_key = self.developer_public_key
-          config.member_token = self.member_token
+          config.member_token         = self.member_token
         end
       end
 
@@ -50,8 +50,10 @@ module T1k
         begin
           me = ::Trello::Member.find(self.user_name)
           raise "User not found" if me.nil?
+
           board = me.boards.select{|x| x.name.upcase == self.board_name.upcase}.first
           raise "Board not found.\nBoards available: #{me.boards.map(&:name)}" if board.nil?
+
           card = board.cards.select{|x| x.url.index(url_card)}.first
           raise "Card not found" if card.nil?
 

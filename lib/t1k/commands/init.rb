@@ -6,16 +6,21 @@ module T1k
 
       def self.run
         if Validate.credentials?
-          puts "There is T1000 file inside your directory. Remove it before do init".red
+          puts "There is T1000 file inside your directory. Remove it before do init.".red
           exit 1
         end
 
-        src = File.join(T1k::path_to_resources, "T1000")
-        dest = T1k::tthousand_path
-
-        FileUtils.cp src, dest
+        self.create_T1000_file
 
         puts "Setup your T1000 file".blue
+      end
+
+
+      def self.create_T1000_file
+        src  = File.join(T1k::path_to_resources, "T1000")
+        dest = T1k::tthousand_path
+
+        FileUtils.cp(src, dest)
       end
     end
   end

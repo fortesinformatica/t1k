@@ -20,10 +20,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib", "resources"]
 
   spec.add_development_dependency 'bundler', '~> 1.9'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rake'   , '~> 10.0'
 
-  spec.add_dependency 'ruby-trello', '~> 1.2.1'
-  spec.add_dependency 'github_api', '~> 0.12'
+  spec.add_dependency 'ruby-trello'  , '~> 1.2.1'
+  spec.add_dependency 'github_api'   , '~> 0.12'
   spec.add_dependency 'activesupport', '~> 4.2'
-  spec.add_dependency 'clive', '~> 1.2.1'
+  spec.add_dependency 'clive'        , '~> 1.2.1'
+  spec.add_dependency 'bitbucket_rest_api'
 end
