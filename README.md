@@ -41,34 +41,37 @@ Your `T1000` should look like this:
 
 ```ruby
 T1k.setup do |config|
-  # Change the repository adapter. Default is github.
-  # config.repository.adapter = :github
-
-  # Change the tracker adapter. Default is trello.
-  # config.tracker.adapter = :trello
   # Setup Github repository credentials
+  # Create an auth_token here: https://github.com/settings/applications
+  #
+  # config.repository.adapter = :github
+  # config.repository.setup do |c|
+  #   c.user = "GITHUB_USER"
+  #   c.repo = "REPOSITORY_NAME"
+  #   c.oauth_token = "YOUR_GITHUB_AUTH_TOKEN"
+  # end
 
-  # Create an auth_token here: https://github.com/settings/tokens
-
-  config.repository.adapter = :github # default is github
-  config.repository.setup do |c|
-    c.user = "GITHUB_USER"
-    c.repo = "REPOSITORY_NAME"
-    c.oauth_token = "YOUR_GITHUB_AUTH_TOKEN"
-  end
+  # If you'll use bitbucket as repository you should set a shell variable with
+  # your password as BITBUCKET_PWD in order to access bitbucket api
+  #  config.repository.adapter = :bitbucket
+  #  config.repository.setup do |c|
+  #    c.user        = "YOUR_BITBUCKET_USERNAME"
+  #    c.repo        = "REPOSITORY_NAME"
+  #    c.password    = "#{ENV['BITBUCKET_PWD']}"
+  #  end
 
   # Setup Trello board credentials
   #
   # Trello APP_DEVELOPER_KEY: https://trello.com/app-key
   # Trello App permission key: https://trello.com/1/connect?key=YOUR_KEY&name=BOARD_NAME&expiration=never&response_type=token&scope=read,write
   #
-  config.tracker.adapter = [:trello, :pivotal, :none] # default is trello
-  config.tracker.setup do |c|
-    c.user_name = "TRELLO_USER"
-    c.board_name = "TRELLO_BOARD_NAME"
-    c.member_token = "TRELLO_APP_TOKEN"
-    c.developer_public_key = "TRELLO_DEVELOPER_PUB_KEY"
-  end
+  # config.tracker.adapter = [:trello, :pivotal, :none]
+  # config.tracker.setup do |c|
+  #   c.user_name = "TRELLO_USER"
+  #   c.board_name = "TRELLO_BOARD_NAME"
+  #   c.member_token = "TRELLO_APP_TOKEN"
+  #   c.developer_public_key = "TRELLO_DEVELOPER_PUB_KEY"
+  # end
 end
 ```
 
