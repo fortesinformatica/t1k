@@ -63,7 +63,7 @@ module T1k
         Issue.new(code, "Link to code: [#{code}](#{html_url})")
       end
 
-      private_class_method def self.issue_url_from issue
+      def self.issue_url_from issue
         issue_number = issue["resource_uri"].match(/issues\/\d+$/)[0] if issue["resource_uri"]
         issue_url    = "https://bitbucket.org/#{self.repo_owner}/#{self.repo}/#{issue_number}"
 
