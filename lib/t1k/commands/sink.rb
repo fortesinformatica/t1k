@@ -2,11 +2,16 @@ module T1k
   module Commands
     class Sink
       def self.run
-        branch = `git branch | grep '*' | awk '{print $2}'`
-        system "git checkout master"
-        system "git pull --rebase origin master"
-        system "git checkout #{branch.strip}"
-        system "git rebase master #{branch.strip}"
+        branch = T1k::Commands::Branch.actual_branch
+
+        [
+          "git checkout master",
+          "git pull --rebase origin master",
+          "git checkout #{branch.strip}",
+          "git rebase master #{branch.strip}"
+        ].each do |cmd|
+           system cmd
+         end
       end
     end
   end

@@ -7,7 +7,7 @@ module T1k
         text_close = ''
 
         raise "Message can't be blank. Use --no-message to ignore this rule." if message.empty? && !no_message
-        branch = `git branch | grep '*' | awk '{print $2}'`
+        branch = T1k::Commands::Branch.actual_branch
 
         text_close = close ? 'close ' : 'ref'
 
