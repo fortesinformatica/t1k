@@ -10,6 +10,7 @@ require 't1k/version'
 require 't1k/constants'
 require 't1k/command'
 
+require 't1k/commands/branch'
 
 require_relative '../spec/support/kernel' if ENV["DEBUG"]
 
