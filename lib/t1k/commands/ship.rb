@@ -4,6 +4,7 @@ module T1k
 
       def self.run
 
+        T1k::Commands::Validate.ability_to_push_on_master
         branch = T1k::Commands::Branch.actual_branch
 
         [

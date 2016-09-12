@@ -1,9 +1,11 @@
 module T1k
   class Repository
 
-    cattr_accessor :adapter
-
+    mattr_accessor :adapter
     @@adapter = nil
+
+    cattr_accessor :default_remote_branch
+    @@default_remote_branch = ""
 
     def self.setup &block
       self.adapter.setup(&block) if block_given?

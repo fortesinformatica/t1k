@@ -19,6 +19,11 @@ T1k.setup do |config|
   #    c.password    = "#{ENV['BITBUCKET_PWD']}"
   #  end
 
+  # config.repository.default_remote_branch = :master
+  # or
+  # config.repository.default_remote_branch = :branch
+  # |-> this option disables direct merge on origin master
+
   # Setup Trello board credentials
   #
   # Trello APP_DEVELOPER_KEY: https://trello.com/app-key
