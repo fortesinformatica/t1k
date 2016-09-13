@@ -6,7 +6,7 @@ module T1k
         T1k::Commands::Sink.run
 
         branch = T1k::Commands::Branch.actual_branch
-        pull = `git push origin #{branch.strip}`
+        pull   = `git push origin #{branch.strip}`
         self.open_browser pull
       end
 
