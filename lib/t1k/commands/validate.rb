@@ -49,17 +49,6 @@ module T1k
       def self.password_from_bitbucket_is_avaliable?
         self.default_repository == T1k::Repositories::Bitbucket and "#{ENV['BITBUCKET_PWD']}".nil?
       end
-
-      def self.ability_to_push_on_master
-        T1k.setup_credentials
-
-        if T1k::Repository.default_remote_branch == :branch
-          puts "You choose to not be able to push on master".red
-          puts "If you REALLY want to push on master you have to set 'config.repository.default_remote_branch' to :master on T1000 config file".red
-          exit 1
-        end
-
-      end
     end
   end
 end
