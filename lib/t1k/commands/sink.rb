@@ -20,7 +20,7 @@ module T1k
         [ "git checkout master",
           "git pull --rebase origin master",
           "git checkout #{branch.strip}",
-          "git rebase master #{branch.strip}"
+          "git rebase master"
         ].each do |cmd|
           system cmd
         end
@@ -28,7 +28,7 @@ module T1k
 
       def self.commands_if_branch(branch)
         [ "git checkout #{branch}",
-          "git pull --rebase",
+          "git pull --rebase #{branch}",
         ].each do |cmd|
           system cmd
         end

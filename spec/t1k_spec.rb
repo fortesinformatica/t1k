@@ -14,8 +14,6 @@ describe T1k do
           T1k.setup do |config|
             config.repository.adapter = :bitbucket
           end
-
-          subject.setup_credentials
         end
 
         context 'on repository' do
