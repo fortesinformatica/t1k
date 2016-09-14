@@ -5,9 +5,9 @@ module T1k
   module Commands
     class Validate
 
-      cattr_accessor :messages
+      mattr_accessor :messages
       @@messages = []
-      @@errors = []
+      @@errors   = []
 
       def self.run
         T1k.setup_credentials

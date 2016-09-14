@@ -2,11 +2,36 @@ module T1k
   module Commands
     class Sink
       def self.run
-        branch = `git branch | grep '*' | awk '{print $2}'`
-        system "git checkout master"
-        system "git pull --rebase origin master"
-        system "git checkout #{branch.strip}"
-        system "git rebase master #{branch.strip}"
+        T1k.setup_credentials
+
+        default_remote_branch = T1k::Repository.default_remote_branch
+        branch                = T1k::Commands::Branch.actual_branch
+
+        if default_remote_branch == :master
+          commands_if_master(branch)
+        elsif default_remote_branch == :branch
+          commands_if_branch(branch)
+        else
+          puts "Invalid default_remote_branch"
+        end
+      end
+
+      def self.commands_if_master(branch)
+        [ "git checkout master",
+          "git pull --rebase origin master",
+          "git checkout #{branch.strip}",
+          "git rebase master #{branch.strip}"
+        ].each do |cmd|
+          system cmd
+        end
+      end
+
+      def self.commands_if_branch(branch)
+        [ "git checkout #{branch}",
+          "git pull --rebase",
+        ].each do |cmd|
+          system cmd
+        end
       end
     end
   end

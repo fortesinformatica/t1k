@@ -4,6 +4,7 @@ require 't1k/commands/hack'
 require 't1k/commands/commit'
 require 't1k/commands/sink'
 require 't1k/commands/ship'
+require 't1k/commands/pull_request'
 
 module T1k
   class CLI < Clive
@@ -69,6 +70,14 @@ module T1k
 
     opt :v, :version, 'Display the current version' do
       puts T1k::VERSION
+    end
+
+    desc 'Send your code to remote branch. Not to master'
+    command :pr do
+
+      action do
+        Commands::PullRequest.run
+      end
     end
   end
 end
