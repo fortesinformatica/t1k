@@ -28,7 +28,7 @@ module T1k
 
       def self.commands_if_branch(branch)
         [ "git checkout #{branch}",
-          "git pull --rebase origin#{branch}",
+          "git pull --rebase origin #{branch}",
         ].each do |cmd|
           system cmd
         end
