@@ -2,7 +2,14 @@ require 'spec_helper'
 
 describe T1k::Commands::PullRequest do
   subject { T1k::Commands::PullRequest }
+
   context '#run' do
+    before do
+      T1k.setup do |config|
+        config.repository.default_remote_branch = :master
+        config.repository.adapter = :bitbucket
+      end
+    end
     it 'have to sink' do
       expect(T1k::Commands::Sink).to receive(:run)
 
@@ -14,8 +21,7 @@ describe T1k::Commands::PullRequest do
           "git checkout master",
           "git pull --rebase origin master",
           "git checkout branch_name",
-          "git rebase master branch_name",
-          "git push origin branch_name"
+          "git rebase master"
         ].each do |cmd|
           allow_any_instance_of(Kernel).to receive(:system).with( cmd )
          end

@@ -19,7 +19,7 @@ module T1k
 
       def self.commands_if_master(branch)
         [ "git checkout master",
-          "git pull --rebase",
+          "git pull --rebase master",
           "git merge #{branch}",
           "git commit -v",
           "git push origin master"
@@ -30,7 +30,7 @@ module T1k
 
       def self.commands_if_branch(branch)
         [ "git checkout #{branch}",
-          "git pull --rebase",
+          "git pull --rebase #{branch}",
           "git commit -v",
           "git push origin #{branch}"
         ].each do |cmd|
