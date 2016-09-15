@@ -12,7 +12,7 @@ describe T1k::Commands::Ship do
 
       it "should checkout to master" do
         [ "git checkout master",
-          "git pull --rebase",
+          "git pull --rebase master",
           "git merge branch_name",
           "git commit -v",
           "git push origin master"
