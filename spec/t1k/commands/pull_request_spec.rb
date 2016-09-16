@@ -21,6 +21,7 @@ describe T1k::Commands::PullRequest do
           "git checkout master",
           "git pull --rebase origin master",
           "git checkout branch_name",
+          "git pull --rebase origin branch_name",
           "git rebase master"
         ].each do |cmd|
           allow_any_instance_of(Kernel).to receive(:system).with( cmd )
