@@ -15,7 +15,7 @@ module T1k
           "git checkout #{branch}",
           "git pull --rebase origin #{branch}",
 
-          "git rebase master"
+          "git merge master"
         ].each do |cmd|
           system cmd
         end
