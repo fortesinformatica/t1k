@@ -44,7 +44,7 @@ module T1k
 
   def self.hack url_card
     card                  = tracker.get_card(url_card)
-    existent_issue_match  = card.name.match /^\[#([0-9]*)\]/
+    existent_issue_match  = card.name.match /^\[#CARD([0-9]*)\]/
     existent_issue_number = existent_issue_match[1] if existent_issue_match.present?
 
     issue_url = existent_issue_number.present? ? repository.get_issue(existent_issue_number)

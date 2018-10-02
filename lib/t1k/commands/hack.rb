@@ -4,7 +4,7 @@ module T1k
 
       def self.run(path_card_part)
         T1k.setup_credentials
-        code_card = T1k::hack path_card_part
+        code_card = "CARD#{T1k::hack path_card_part}"
 
         system 'git checkout master'
         system 'git pull --rebase origin master'

@@ -65,7 +65,7 @@ module T1k
 
       def self.update_card card, issue
         puts 'Updating card'
-        card.name = "[##{issue.code}] #{card.name}"
+        card.name = "[#CARD#{issue.code}] #{card.name}"
         card.desc = "#{issue.link} #{card.desc}"
         card.save
       end
