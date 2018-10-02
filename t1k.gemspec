@@ -6,8 +6,8 @@ require 't1k/version'
 Gem::Specification.new do |spec|
   spec.name          = "t1k"
   spec.version       = T1k::VERSION
-  spec.authors       = ["Rodrigo Maia", "Fernando Martinez", "Felipe Aquino"]
-  spec.email         = ["rodrigomb@gmail.com", "fernando.xps@gmail.com", "aquinofb@gmail.com"]
+  spec.authors       = ["Rodrigo Maia", "Felipe Aquino", "Fernando Martinez"]
+  spec.email         = ["rodrigomb@gmail.com", "aquinofb@gmail.com", "fernando.xps@gmail.com"]
 
   spec.homepage    = "https://github.com/fortesinformatica/t1k"
   spec.summary     = "T1K - Automated Git and Trello Workflow"
@@ -24,8 +24,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov' , '~>0.11.2'
   spec.add_development_dependency 'pry'
 
-  spec.add_dependency 'ruby-trello'  , '~> 1.2.1'
-  spec.add_dependency 'github_api'   , '~> 0.12'
+  spec.add_dependency 'ruby-trello'  , '~> 2.1'
+  spec.add_dependency 'github_api'   , '~> 0.18'
   spec.add_dependency 'activesupport', '~> 4.2'
   spec.add_dependency 'clive'        , '~> 1.2.1'
   spec.add_dependency 'bitbucket_rest_api'
