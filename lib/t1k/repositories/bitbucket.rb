@@ -58,7 +58,7 @@ module T1k
       def self.get_issue_number html_url
         exit 1 if html_url.nil?
 
-        code = html_url[html_url.rindex('/CARD')+1..html_url.size]
+        code = html_url[html_url.rindex('/')+1..html_url.size]
 
         Issue.new(code, "Link to code: [#{code}](#{html_url})")
       end
