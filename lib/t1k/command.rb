@@ -68,16 +68,16 @@ module T1k
       end
     end
 
-    opt :v, :version, 'Display the current version' do
-      puts T1k::VERSION
-    end
-
     desc 'Send your code to remote branch. Not to master'
-    command :pr do
+    command :pr, arg: '<dest_branch>' do
 
       action do
-        Commands::PullRequest.run
+        Commands::PullRequest.run dest_branch
       end
+    end
+
+    opt :v, :version, 'Display the current version' do
+      puts T1k::VERSION
     end
   end
 end
