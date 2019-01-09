@@ -69,10 +69,10 @@ module T1k
     end
 
     desc 'Send your code to remote branch. Not to master'
-    command :pr, arg: '<dest_branch>' do
+    command :pr do
 
       action do
-        Commands::PullRequest.run dest_branch
+        Commands::PullRequest.run
       end
     end
 
