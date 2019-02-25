@@ -14,9 +14,10 @@ T1k.setup do |config|
   # your password as BITBUCKET_PWD in order to access bitbucket api
   #  config.repository.adapter = :bitbucket
   #  config.repository.setup do |c|
-  #    c.user        = "YOUR_BITBUCKET_USERNAME"
-  #    c.repo        = "REPOSITORY_NAME"
-  #    c.password    = "#{ENV['BITBUCKET_PWD']}"
+  #  c.repo_owner = "REPO_OWNER"
+  #  c.repo = "REPO"
+  #  c.oauth_token = 'OAUTH_TOKEN'
+  #  c.oauth_secret = 'OAUTH_SECRET'
   #  end
 
   # config.repository.default_remote_branch = :master
