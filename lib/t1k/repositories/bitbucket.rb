@@ -1,8 +1,13 @@
-require 'bitbucket_rest_api'
+require 'tinybucket'
 
 module T1k
   module Repositories
     class Bitbucket
+      cattr_accessor :oauth_token
+      @@oauth_token = ""
+
+      cattr_accessor :oauth_secret
+      @@oauth_secret = ""
 
       cattr_accessor :user
       @@user = ""
@@ -26,17 +31,21 @@ module T1k
 
       def self.create_issue title
         puts 'Creating issue'
-        me                = self.login
-        self.repo_owner   = Bitbucket.get_repo_owner_for me
-
-        issue             = me.issues.create(self.repo_owner, self.repo, { title: title })
-        issue_number      = self.send(:issue_url_from, issue)
+        me  = self.login
+        rep = me.repo(self.repo_owner, self.repo)
+        issue = me.issues.create({ title: title })
+        issue_number = self.send(:issue_url_from, issue)
 
         issue_number
       end
 
       def self.login
-        BitBucket.new basic_auth:  "#{self.user}:#{self.password}"
+        Tinybucket.configure do |config|
+          config.oauth_token = self.oauth_token
+          config.oauth_secret = self.oauth_secret
+        end
+        
+        Tinybucket.new
       end
 
       def self.get_issue number
@@ -46,11 +55,9 @@ module T1k
         end
 
         puts 'Recovering existent issue'
-        me                = self.login
-        self.repo_owner   = Bitbucket.get_repo_owner_for me
-
-        issue             = me.issues.find(self.repo_owner, self.repo, number )
-        issue_number      = self.send(:issue_url_from, issue)
+        me    = self.login
+        issue = rep.issues.find(number)
+        issue_number = self.send(:issue_url_from, issue)
 
         issue_number
       end
@@ -64,25 +71,7 @@ module T1k
       end
 
       def self.issue_url_from issue
-        issue_number = issue["resource_uri"].match(/issues\/\d+$/)[0] if issue["resource_uri"]
-        issue_url    = "https://bitbucket.org/#{self.repo_owner}/#{self.repo}/#{issue_number}"
-
-        issue_url
-      end
-
-      def self.get_repo_owner_for me
-        unless me.kind_of? BitBucket::Client
-          puts "You should pass a valid user."
-          exit 1
-        end
-
-        project = me.repos.all.select {|hash| hash.name == self.repo }
-
-        # /1.0/repositories/OWNER/REPO
-        # > 1.	/repositories/
-        # > 2.	OWNER
-
-        project[0]['resource_uri'].match(/(\/\w+\/)(\w+)/)[2]
+        issue.links['self']['href']
       end
 
       def self.setup &block
@@ -90,18 +79,13 @@ module T1k
       end
 
       def self.valid_keys?
-        me = Bitbucket.login
+        me = self.login
 
         begin
-          has_project = me.repos.all.select {|hash| hash.name == self.repo }
-
-          unless has_project.empty?
-            @@messages << "Wecolme #{self.user} - BitBucket"
-          end
-
-          return not(has_project.empty?)
+          has_project = me.repo(self.repo_owner, self.repo).load
+          @@messages << "Wecolme to BitBucket"
         rescue Exception => e
-          @@errors << e.message
+          @@errors << "Bucket not recovery: #{e.message}"
           return false
         end
       end

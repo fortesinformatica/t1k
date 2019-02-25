@@ -19,14 +19,14 @@ Gem::Specification.new do |spec|
   spec.executables   = ["t1k"]
   spec.require_paths = ["lib", "resources"]
 
-  spec.add_development_dependency 'bundler'   , '~> 1.9'
+  spec.add_development_dependency 'bundler'   , '~> 2.0.1'
   spec.add_development_dependency 'rake'      , '~> 10.0'
   spec.add_development_dependency 'simplecov' , '~>0.11.2'
   spec.add_development_dependency 'pry'
 
+  spec.add_dependency 'tinybucket2'  , '~> 2.0.0'
   spec.add_dependency 'ruby-trello'  , '~> 2.1'
   spec.add_dependency 'github_api'   , '~> 0.18'
   spec.add_dependency 'activesupport', '~> 4.2'
-  spec.add_dependency 'clive'        , '~> 1.2.1'
-  spec.add_dependency 'bitbucket_rest_api'
+  spec.add_dependency 'clive'        , '~> 1.2.1'  
 end
