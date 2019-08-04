@@ -15,6 +15,9 @@ module T1k
       cattr_accessor :repo
       @@repo = ""
 
+      cattr_accessor :ref_message
+      @@ref_message = "ref"
+
       cattr_accessor :repo_owner
       @@repo_owner = ""
 
@@ -44,7 +47,7 @@ module T1k
           config.oauth_token = self.oauth_token
           config.oauth_secret = self.oauth_secret
         end
-        
+
         Tinybucket.new
       end
 

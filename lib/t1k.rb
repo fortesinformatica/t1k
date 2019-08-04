@@ -68,7 +68,7 @@ module T1k
     Repository.instance_eval do
       @@adapter =  self.default_repository
       class << self
-        delegate :create_issue, :get_issue, :get_issue_number, to: @@adapter
+        delegate :ref_message, :create_issue, :get_issue, :get_issue_number, to: @@adapter
       end
     end
   end

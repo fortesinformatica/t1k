@@ -13,6 +13,9 @@ module T1k
       cattr_accessor :repo
       @@repo = ""
 
+      cattr_accessor :ref_message
+      @@ref_message = ""
+
       cattr_accessor :messages
       @@messages = []
       cattr_accessor :errors
