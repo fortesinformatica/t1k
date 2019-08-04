@@ -7,33 +7,76 @@ describe T1k::Commands::Commit do
     let (:add)        { false   }
     let (:no_message) { true    }
 
-    it "should raise an exception" do
-      message    = ""
-      no_message =  false
+    context 'for github adapter' do
+      before do
+        T1k.setup do |config|
+          config.repository.adapter = :github
+        end
+      end
 
-      expect { T1k::Commands::Commit.run( message, close, add, no_message) }.to raise_error("Message can't be blank. Use --no-message to ignore this rule.")
+      it "should raise an exception" do
+        message    = ""
+        no_message =  false
+
+        expect { T1k::Commands::Commit.run( message, close, add, no_message) }.to raise_error("Message can't be blank. Use --no-message to ignore this rule.")
+      end
+
+      it "does not raise an exception" do
+        message    = ""
+        no_message =  true
+
+        expect { T1k::Commands::Commit.run( message, close, add, no_message) }.to_not raise_error
+      end
+
+      it "it have to skip circle ci when is not a close commit" do
+        close = false
+        expect_any_instance_of(Kernel).to receive(:system).with("git commit -m '[#branch_name] teste'")
+
+        T1k::Commands::Commit.run( msg, close, add, no_message)
+      end
+
+      it "have to close the issue when close=true is passed" do
+        close = true
+        expect_any_instance_of(Kernel).to receive(:system).with("git commit -m '[close#branch_name] teste'")
+
+        T1k::Commands::Commit.run( msg, close, add, no_message)
+      end
     end
 
+    context 'for bitbucket adapter' do
+      before do
+        T1k.setup do |config|
+          config.repository.adapter = :bitbucket
+        end
+      end
 
-    it "does not raise an exception" do
-      message    = ""
-      no_message =  true
+      it "should raise an exception" do
+        message    = ""
+        no_message =  false
 
-      expect { T1k::Commands::Commit.run( message, close, add, no_message) }.to_not raise_error("Message can't be blank. Use --no-message to ignore this rule.")
-    end
+        expect { T1k::Commands::Commit.run( message, close, add, no_message) }.to raise_error("Message can't be blank. Use --no-message to ignore this rule.")
+      end
 
-    it "it have to skip circle ci when is not a close commit" do
-      close = false
-      expect_any_instance_of(Kernel).to receive(:system).with("git commit -m '[ref#branch_name] teste'")
+      it "does not raise an exception" do
+        message    = ""
+        no_message =  true
 
-      T1k::Commands::Commit.run( msg, close, add, no_message)
-    end
+        expect { T1k::Commands::Commit.run( message, close, add, no_message) }.to_not raise_error
+      end
 
-    it "have to close the issue when close=true is passed" do
-      close = true
-      expect_any_instance_of(Kernel).to receive(:system).with("git commit -m '[close#branch_name] teste'")
+      it "it have to skip circle ci when is not a close commit" do
+        close = false
+        expect_any_instance_of(Kernel).to receive(:system).with("git commit -m '[ref#branch_name] teste'")
 
-      T1k::Commands::Commit.run( msg, close, add, no_message)
+        T1k::Commands::Commit.run( msg, close, add, no_message)
+      end
+
+      it "have to close the issue when close=true is passed" do
+        close = true
+        expect_any_instance_of(Kernel).to receive(:system).with("git commit -m '[close#branch_name] teste'")
+
+        T1k::Commands::Commit.run( msg, close, add, no_message)
+      end
     end
   end
 
