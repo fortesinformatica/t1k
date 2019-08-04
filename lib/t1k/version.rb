@@ -1,3 +1,3 @@
 module T1k
-  VERSION = "4.2.2"
+  VERSION = "4.2.3"
 end
