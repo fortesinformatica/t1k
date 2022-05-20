@@ -4,7 +4,7 @@ T1K - Automated Git and Trello Workflow
 
 Use those scripts to automatically create branchs associated with issues and tracked commits with cards on Trello.
 
-T1k allow you from command line to use some tasks to make easy to create brach, commit, create an issue and track it down in a Trello's card.
+T1k allow you from command line to use some tasks to make easy to create branch, commit, create an issue and track it down in a Trello's card.
 
 - [T1K](#t1k)
   - [Getting started](#getting-started)
